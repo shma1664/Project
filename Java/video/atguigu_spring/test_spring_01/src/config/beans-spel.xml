@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="address" 
+		  class="com.shma.spring.spel.Address"
+		  p:city="#{'芜湖'}"
+		  p:street="中山路">
+	</bean>
+	
+	<bean id="car"
+		  class="com.shma.spring.spel.Car"
+		  p:brand="大众"
+		  p:corp="#{'桑塔纳'}"
+		  p:price="#{15000}"
+		  p:rand="#{T(java.lang.Math).PI * 80}"
+		  p:speed="250">
+	</bean>
+	
+	<bean id="person"
+		  class="com.shma.spring.spel.Person"
+		  p:car="#{car}"
+		  p:city="#{address.city}"
+		  p:levelInfo="#{car.speed lt 400 ? '普通车型' : '跑车'}"
+		  p:name="马韶华">
+	</bean>
+	
+</beans>

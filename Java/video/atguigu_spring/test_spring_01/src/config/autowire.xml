@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	
+	<bean id="car" 
+		  class="com.shma.spring.autowire.Car"
+		  p:brand="东风雪铁龙"
+		  p:corp="C3-X2"
+		  p:price="150000">
+	</bean>
+	
+	<bean id="address"
+		  class="com.shma.spring.autowire.Address"
+		  p:city="芜湖"
+		  p:street="中山路">
+	</bean>
+	
+	<!-- 
+	<bean id="person" 
+		  class="com.shma.spring.autowire.Person"
+		  p:name="马韶华"
+		  p:address-ref="address"
+		  p:car-ref="car">
+	</bean>
+	-->
+	
+	<!-- 通过类型自动加载 -->
+	<!-- 
+	<bean id="person" 
+		  class="com.shma.spring.autowire.Person"
+		  p:name="马韶华"
+		  autowire="byType">
+	</bean>
+	 -->
+	
+	<!-- 通过setter名称和bean中名称对应-->
+	<bean id="person" 
+		  class="com.shma.spring.autowire.Person"
+		  p:name="马韶华"
+		  autowire="byName">
+	</bean>
+	
+	<bean id="person02" 
+		  class="com.shma.spring.autowire.Person"
+		  p:address-ref="address"
+		  p:car-ref="car"
+		  depends-on="car">
+	</bean>
+
+</beans>

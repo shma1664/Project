@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 静态工厂方法创建对象 -->
+	<bean id="car1"
+		class="com.shma.spring.factory.BeanStaticFactory" 
+		factory-method="getCar">
+		<constructor-arg value="audi"></constructor-arg>
+	</bean>
+	
+	<!-- 工厂方法实例 -->
+	<bean id="factoryMethod" class="com.shma.spring.factory.InstanceFactoryMethod"></bean>
+	<bean id="car2" factory-bean="factoryMethod" factory-method="getCar">
+		<constructor-arg value="dazong"></constructor-arg>
+	</bean>
+
+</beans>

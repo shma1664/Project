@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="abprop"
+		  class="com.shma.spring.relation.Properties"
+		  p:host="192.168.28.133"
+		  p:port="3306"
+		  abstract="true">
+	</bean>
+	
+	<bean id="prop01" 
+		  parent="abprop"
+		  p:username="root"
+		  p:password="shma1664">
+	</bean>
+	
+	<bean id="prop02" 
+		  parent="abprop"
+		  p:username="root"
+		  p:password="shma1664"
+		  p:port="22">
+	</bean>
+	
+</beans>

@@ -1,0 +1,156 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<!-- 属性注入 -->
+	<bean id="helloWorld" class="com.shma.spring.helloworld.HelloWorld">
+		<property name="userName" value="马韶华"></property>
+	</bean>
+	
+	<!-- 构造器注入 -->
+	<bean id="car1" class="com.shma.spring.helloworld.Car">
+		<constructor-arg value="Audi" index="0" type="java.lang.String"></constructor-arg>
+		<constructor-arg index="1" type="java.lang.String">
+			<value><![CDATA[Shanghai]]></value>
+		</constructor-arg>
+		<constructor-arg value="300000" index="2" type="double"></constructor-arg>
+	</bean>
+	
+	<bean id="car2" class="com.shma.spring.helloworld.Car">
+		<constructor-arg value="XianDai" index="0" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="Beijing" index="1" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="240" index="2" type="int"></constructor-arg>
+	</bean>
+	
+	<!-- 属性注入 -->
+	<bean id="person" class="com.shma.spring.helloworld.Person">
+		<property name="name" value="马韶华"></property>
+		<property name="age" value="26"></property>
+		<property name="car"><ref bean="car1"/></property>
+		<!-- 
+		<property name="car" ref="car1"></property>
+		 -->
+	</bean>
+	
+	<!-- 构造器注入 -->
+	<bean id="person2" class="com.shma.spring.helloworld.Person">
+		<constructor-arg index="0" type="java.lang.String">
+			<value>齐娇娇</value>
+		</constructor-arg>
+		<constructor-arg index="1" type="int" value="27"></constructor-arg>
+		<constructor-arg index="2"><null/></constructor-arg>
+		<!-- 
+		<constructor-arg index="2" ref="car2"></constructor-arg>
+		 -->
+		<constructor-arg index="3">
+			<set>
+				<ref bean="lenovo"/>
+				<ref bean="hp"/>
+			</set>
+		</constructor-arg>
+		<constructor-arg index="4">
+			<map>
+				<entry key="lenovo" value-ref="lenovo"></entry>
+				<entry key="hp" value-ref="hp"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	
+	<!-- 内部类注入 -->
+	<bean id="person3" class="com.shma.spring.helloworld.Person">
+		<constructor-arg index="0" type="java.lang.String">
+			<value>齐娇娇</value>
+		</constructor-arg>
+		<constructor-arg index="1" type="int" value="27"></constructor-arg>
+		<constructor-arg index="2">
+			<bean class="com.shma.spring.helloworld.Car">
+				<constructor-arg value="奇瑞QQ" index="0" type="java.lang.String"></constructor-arg>
+				<constructor-arg index="1" type="java.lang.String">
+					<value><![CDATA[<WuHu>]]></value>
+				</constructor-arg>
+				<constructor-arg value="60000" index="2" type="double"></constructor-arg>
+			</bean>
+		</constructor-arg>
+		<!-- 
+			级联属性赋值,属性需先初始化，才可以为级联属性赋值，否则会报异常
+		 -->
+		<property name="car.speed" value="260"></property>
+		<property name="computers">
+			<list>
+				<ref bean="lenovo"/>
+				<ref bean="hp"/>
+			</list>
+		</property>
+		<!-- 引入map -->
+		<property name="computerMap">
+			<map>
+				<entry key="lenovo" value-ref="lenovo"></entry>
+				<entry key="hp" value-ref="hp"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="lenovo" class="com.shma.spring.helloworld.Computer">
+		<constructor-arg index="0" type="java.lang.String" value="Intel"></constructor-arg>
+		<constructor-arg index="1" type="float" value="2048.0"></constructor-arg>
+		<constructor-arg index="2" type="double" value="250.0"></constructor-arg>
+	</bean>
+	
+	<bean id="hp" class="com.shma.spring.helloworld.Computer">
+		<property name="cpu" value="AMD"></property>
+		<property name="memory" value="4096.0"></property>
+		<property name="hardDisk" value="500.0"></property>
+	</bean>
+	
+	<!-- properties -->
+	<bean id="dataSource" class="com.shma.spring.helloworld.DataSource">
+		<property name="properties">
+			<props>
+				<prop key="username">root</prop>
+				<prop key="password">root</prop>
+				<prop key="jdbcUrl">jdbc://mysql:///test</prop>
+				<prop key="driverClass">com.mysql.jdbc.Driver</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 使用util工具，创建单例bean集合，以便引用 -->
+	<util:list id="computers">
+		<ref bean="lenovo"/>
+		<ref bean="hp"/>
+		<bean class="com.shma.spring.helloworld.Computer">
+			<property name="cpu" value="IOS"></property>
+			<property name="memory" value="1024"></property>
+			<property name="hardDisk" value="120"></property>
+		</bean>
+	</util:list>
+	
+	<util:map id="computerMap">
+		<entry key="lenovo" value-ref="lenovo"></entry>
+		<entry key="hp" value-ref="hp"></entry>
+	</util:map>
+	
+	<bean id="person4" class="com.shma.spring.helloworld.Person">
+		<property name="name" value="孙威"></property>
+		<property name="age" value="28"></property>
+		<property name="car" ref="car2"></property>
+		<property name="computers" ref="computers"></property>
+		<property name="computerMap" ref="computerMap"></property>
+	</bean>
+	
+	<!-- p 简化命名 -->
+	<bean id="person5" 
+		  class="com.shma.spring.helloworld.Person"
+		  p:age="30"
+		  p:car-ref="car1"
+		  p:computerMap-ref="computerMap"
+		  p:computers-ref="computers"
+		  p:name="樊慧"></bean>
+	
+</beans>

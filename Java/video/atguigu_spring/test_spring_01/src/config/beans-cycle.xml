@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="car" 
+	      class="com.shma.spring.cycle.Car"
+		  p:brand="Audi"
+		  p:corp="A4"
+		  p:price="280000"
+		  init-method="init"
+		  destroy-method="destroy">
+	</bean>
+	
+	<bean id="computer"
+		  class="com.shma.spring.cycle.Computer"
+		  p:cpu="Intel"
+		  p:hardDisk="500"
+		  p:memory="8">
+	</bean>
+	
+	<bean class="com.shma.spring.cycle.MyBeanPostProcessor"></bean>
+	
+</beans>
