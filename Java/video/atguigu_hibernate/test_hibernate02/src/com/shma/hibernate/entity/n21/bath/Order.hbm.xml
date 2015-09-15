@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-18 15:21:35 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.shma.hibernate.entity.n21.bath">
+    <class name="Order" table="ORDERS">
+        <id name="orderId" type="int">
+            <column name="ORDER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="orderName" type="java.lang.String">
+            <column name="ORDER_NAME" />
+        </property>
+        
+        <!-- 多对一映射关系
+        	name:多这一端的一那一端的属性名称
+        	class：一端的类型
+        	column：一那一端对应在多端的外键名称
+         -->
+        <many-to-one name="customer" class="Customer">
+        	<column name="customer_id"></column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

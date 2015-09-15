@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shma.hibernate.entity.n21.bath">
+    <class name="Customer" table="CUSTOMERS">
+        <id name="customerId" type="int">
+            <column name="CUSTOMER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="customerName" type="java.lang.String">
+            <column name="CUSTOMER_NAME" />
+        </property>
+        
+        <!--
+        	1对多映射关系那个属性集合
+        	set：映射集合为set类型
+        	table：set中集合类型的所对应的表名，需要与多对一中的表名一致
+        	inverse：指定由哪一方来维护关联关系. 通常设置为 true, 以指定由多的一端来维护关联关系
+        	cascade：级联操作,save-update级联保存并修改关联，delete:级联删除
+        	order-by:排序，字段是数据库里面的字段类型
+        	name:1的集合属性名称
+         -->
+        <set name="orders" table="ORDERS" inverse="true" order-by="order_name desc">
+			<!-- 执行多的表中的外键列的名字 -->
+			<key column="CUSTOMER_ID"></key>
+			<!-- 指定映射类型 -->
+			<one-to-many class="Order"/>       
+        </set>
+    </class>
+</hibernate-mapping>

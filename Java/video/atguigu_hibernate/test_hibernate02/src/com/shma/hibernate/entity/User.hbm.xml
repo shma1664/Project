@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shma.hibernate.entity">
+	<!-- 
+		class:
+		1)dynamic-insert:默认为false，如果设置为true，则表示保存一个insert时，动态生成sql语句，仅保存字段不能为空的值
+		2)dynamic-update:默认为false，如果设置为true，则表示更新一个update时，动态生成sql语句，仅更新修改的字段值
+	 	3)select-before-update：在执行update之前，是否执行一次查询，默认为false
+	 -->
+    <class name="User" table="USER" select-before-update="true" dynamic-insert="true">
+        <!-- 
+      		id：
+      		unsaved-value:表示持久化对象的oid如果为该属性值20，则认为是一个临时对象，执行保存操作
+      		type:可以为java类型，也可以设置为hibernate类型
+      		class:设置持久化类设置唯一标识符方式
+      			increment:由hibernate先执行查询max，再+1，并发下不安全
+      			identity：底层数据库自增，底层数据库必须设置为自增，适用于mysql、sqlserver
+      			sequence：底层数据库提供序列生成唯一标识符，如oracle
+      			hilo：hibernate生成组件，在数据库创建一张表，读取并修改该表保存自增
+      			native：常用，自动识别使用identity、sequence、hilo
+         -->
+        <id name="id" type="java.lang.Integer" unsaved-value="20">
+            <column name="ID"  />
+            <generator class="native" />
+        </id>
+        <!-- 
+        	property:
+        		1) access:制定hibernate默认属性访问策略，默认为property，调用getter和setter方法，若设置为field，则通过反射访问
+        		2) unique:设置属性唯一值
+        		3) index：设置索引
+        		4) length: 设置字段长度
+        		5) scale: 当字段为double或float类型时，指定小数点后保留位数
+        		6) formula: 派生属性，sql表达式，用()括起来
+         -->
+        <property name="name" type="java.lang.String" 
+        		access="property" unique="true" index="user_index" length="20">
+            <column name="NAME" />
+        </property>
+        <property name="age" type="java.lang.Integer" index="user_index">
+            <column name="AGE" />
+        </property>
+        <!-- 
+        	在 Java 中, 代表时间和日期的类型包括: java.util.Date 和 java.util.Calendar. 
+        	此外, 在 JDBC API 中还提供了 3 个扩展了 java.util.Date 类的子类: java.sql.Date, java.sql.Time 和 java.sql.Timestamp, 这三个类分别和标准 SQL 类型中的 DATE, TIME 和 TIMESTAMP 类型对应
+			在标准 SQL 中, DATE 类型表示日期, TIME 类型表示时间, TIMESTAMP 类型表示时间戳, 同时包含日期和时间信息
+         -->
+        <property name="date" type="timestamp">
+            <column name="DATE" />
+        </property>
+        <property name="desc" formula="(select concat(name,',',date) from user t where t.id = id)"></property>
+    	<!-- 映射大对象 -->
+    	<property name="oldContent">
+    		<column name="OLD_CONTENT" sql-type="text"></column>
+    	</property>
+    	
+    	<!-- 
+    	mysql数据库不支持
+    	<property name="realContent">
+    		<column name="real_Content" sql-type="clob"></column>
+    	</property>
+    	 -->
+    	
+    	<property name="image">
+    		<column name="image" sql-type="blob"></column>
+    	</property>
+    </class>
+</hibernate-mapping>
