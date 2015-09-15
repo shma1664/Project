@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shma.hibernate.one2one.foreign">
+    <class name="Manager" table="MANAGER">
+        <id name="mgrId" type="int">
+            <column name="MGR_ID" />
+            <generator class="native" />
+        </id>
+        <property name="mgrName" type="java.lang.String">
+            <column name="MGR_NAME" />
+        </property>
+       	
+       	<!-- 多对一映射关系来映射1对1的关系，通过设置唯一键 -->
+       	<many-to-one name="dept" class="Department">
+       		<column name="DEPT_ID" unique="true"></column>
+       	</many-to-one>
+    </class>
+</hibernate-mapping>

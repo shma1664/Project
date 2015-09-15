@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-19 11:28:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.shma.hibernate.one2one.foreign">
+    <class name="Department" table="DEPARTMENTS">
+        <id name="deptId" type="int">
+            <column name="DEPT_ID" />
+            <generator class="native" />
+        </id>
+        <property name="deptName" type="java.lang.String">
+            <column name="DEPT_NAME" />
+        </property>
+        
+        <!-- 一对一映射关系 -->
+        <!-- 没有外键的一端需要使用one-to-one元素，该元素使用 property-ref 属性指定使用被关联实体主键以外的字段作为关联字段 -->
+        <one-to-one name="mgr" class="Manager" property-ref="dept" cascade="delete"></one-to-one>
+    </class>
+</hibernate-mapping>
