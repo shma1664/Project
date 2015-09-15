@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-1 15:34:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.shma.entities.Department" table="vhscene_department_message">
+        <id name="departId" type="int">
+            <column name="DEPART_ID" />
+            <generator class="native" />
+        </id>
+        <property name="depart_name" type="java.lang.String">
+            <column name="DEPART_NAME" />
+        </property>
+        <property name="is_valid" type="int">
+            <column name="IS_VALID" />
+        </property>
+        <property name="modify_date" type="date">
+            <column name="MODIFY_DATE" />
+        </property>
+        <set name="jobs" table="vhscene_category_jobs" inverse="true" lazy="true">
+            <key>
+                <column name="DEPART_ID" />
+            </key>
+            <one-to-many class="com.shma.entities.Job" />
+        </set>
+    </class>
+</hibernate-mapping>

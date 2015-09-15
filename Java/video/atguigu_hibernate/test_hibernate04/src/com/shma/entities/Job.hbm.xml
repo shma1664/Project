@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-1 15:34:07 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.shma.entities.Job" table="vhscene_category_jobs">
+        <id name="job_id" type="int">
+            <column name="JOB_ID" />
+            <generator class="native" />
+        </id>
+        <property name="job_name" type="java.lang.String">
+            <column name="JOB_NAME" />
+        </property>
+        <property name="job_description" type="java.lang.String">
+            <column name="JOB_DESCRIPTION" />
+        </property>
+        <property name="experience_required" type="java.lang.String">
+            <column name="EXPERIENCE_REQUIRED" />
+        </property>
+        <property name="is_valid" type="int">
+            <column name="IS_VALID" />
+        </property>
+        <property name="modify_date" type="java.util.Date">
+            <column name="MODIFY_DATE" />
+        </property>
+        <many-to-one name="dept" class="com.shma.entities.Department">
+            <column name="DEPART_ID" />
+        </many-to-one>
+    </class>
+    
+    <query name="getJobs"><![CDATA[from Job j where j.is_valid = :isvalid and j.dept >= :minDeptId and j.dept <= :maxDeptId]]></query>
+</hibernate-mapping>
