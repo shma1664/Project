@@ -8,7 +8,9 @@ package com.shma.concurrency.chapter05;
 public class TestCreateThread {
 
 	public static void main(String[] args) {
+		
 		System.out.println(Thread.currentThread().getName());
+		
 		/**
 		 * 线程启动是有序的，但是执行是无序的，执行是由操作系统和JVM决定的，执行顺序与启动顺序并非一致
 		 *  main
