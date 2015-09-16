@@ -3,11 +3,6 @@ package com.shma.jcip.chapter10;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.shma.jcip.chapter10.CooperatingDeadlock.Dispather;
-import com.shma.jcip.chapter10.CooperatingDeadlock.Image;
-import com.shma.jcip.chapter10.CooperatingDeadlock.Point;
-import com.shma.jcip.chapter10.CooperatingDeadlock.Taxi;
-
 public class CooperatingNoDeadlock {
 	class Taxi {
 		private final Dispather dispather;
