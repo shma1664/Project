@@ -26,7 +26,7 @@ public class CooperatingNoDeadlock {
 				}
 			}
 			
-			if(true)
+			if(isFinished)
 				dispather.notifyAvailable(this);
 		}
 	}
