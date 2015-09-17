@@ -2,11 +2,11 @@ package com.shma.linklist;
 
 import org.junit.Test;
 
-public class MyLinkListTest {
+public class LinkListTest {
 
 	@Test
 	public void test() {
-		MyLinkList<Long> linkList = new MyLinkList<Long>();
+		LinkList<Long> linkList = new LinkList<Long>();
 		linkList.add(10L);
 		linkList.add(20L);
 		linkList.add(30L);
@@ -15,7 +15,7 @@ public class MyLinkListTest {
 		
 		linkList.display();
 		
-		MyLinkList<Person> personList = new MyLinkList<Person>();
+		LinkList<Person> personList = new LinkList<Person>();
 		personList.add(new Person(1, "ÂíÉØ»ª"));
 		personList.add(new Person(2, "Æë½¿½¿"));
 		personList.add(new Person(3, "ËïÍş"));
@@ -105,8 +105,8 @@ public class MyLinkListTest {
 			return "Person [id=" + id + ", name=" + name + "]";
 		}
 
-		private MyLinkListTest getOuterType() {
-			return MyLinkListTest.this;
+		private LinkListTest getOuterType() {
+			return LinkListTest.this;
 		}
 	}
 

@@ -1,14 +1,20 @@
 package com.shma.linklist;
 
-public class MyLinkList<E> {
+/**
+ * µ•œÚ¡¥±Ì
+ * @author h p
+ *
+ * @param <E>
+ */
+public class LinkList<E> {
 
 	private Node<E> firstNode;
 	
-	public MyLinkList() {
+	public LinkList() {
 		
 	}
 	
-	public MyLinkList(E e) {
+	public LinkList(E e) {
 		this.firstNode = new Node<E>(e);
 	}
 	
