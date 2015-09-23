@@ -11,7 +11,7 @@ public class HanoiTower {
 	 * 移动汉诺塔
 	 * @param topNum 移动的盘子层数
 	 * @param from 起始塔座
-	 * @param tmp 中间塔座
+	 * @param tmp 中间 塔座
 	 * @param to 目标塔座
 	 */
 	public static void doTower(int topNum, String from, String tmp, String to) {
