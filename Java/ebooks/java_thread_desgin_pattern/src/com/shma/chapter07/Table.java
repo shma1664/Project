@@ -2,6 +2,7 @@ package com.shma.chapter07;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * 生产者消费者模式中的存储中介
