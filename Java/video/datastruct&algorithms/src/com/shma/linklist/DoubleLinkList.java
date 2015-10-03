@@ -1,7 +1,5 @@
 package com.shma.linklist;
 
-import java.awt.Frame;
-
 /**
  * Ë«ÏòÁ´±í
  * @author h p
