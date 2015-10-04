@@ -108,6 +108,10 @@ public class Graph<T> {
 		}
 	}
 	
+	/**
+	 * 最小生成树
+	 * 连接线的长度为顶点数-1
+	 */
 	public void mst() {
 		int index = 0;
 		Vertex<T> vertex = vertexs[index];
