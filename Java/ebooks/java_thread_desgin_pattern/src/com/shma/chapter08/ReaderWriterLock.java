@@ -29,7 +29,7 @@ public class ReaderWriterLock {
 	 */
 	public void readLock() throws InterruptedException {
 		//有线程正在写入或者有线程等待写入
-		if(isWritering || 
+		while(isWritering || 
 				(isWritePriority && waitingWriterCounter.get() > 0)) {
 			synchronized(object) {
 				object.wait();
@@ -60,7 +60,7 @@ public class ReaderWriterLock {
 		waitingWriterCounter.incrementAndGet();
 		
 		try {
-			if(readingCounter.get() > 0 || isWritering) {
+			while(readingCounter.get() > 0 || isWritering) {
 				synchronized(object) {
 					object.wait();
 				}
