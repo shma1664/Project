@@ -6,10 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import java.util.TimerTask;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Header;
@@ -20,7 +17,7 @@ import org.jsoup.select.Elements;
 
 import com.abc360.classes.util.HttpTookit;
 
-public class AboutClasses { 
+public class AboutClasses extends TimerTask { 
 	
 	/**
 	 * 登录
@@ -47,7 +44,7 @@ public class AboutClasses {
 		return false;
 	}
 
-	public String chooseTeacher(String tid, Map<String, List<String>> tidMap) {
+	public String chooseTeacher(String tid, Map<String, List<String>> tidMap, String mid) {
 		String url = "http://www.abc360.com/MemberCenter/BookClass/chooseTeacher";
 		
 		Calendar calendar = Calendar.getInstance();
@@ -62,7 +59,7 @@ public class AboutClasses {
 		Map<String, String> params = new HashMap<String, String>();
 //		newDate = 1450540800;
 		params.put("date", newDate+"");
-		params.put("mid", "5357");
+		params.put("mid", mid);
 		params.put("catalog", "1");
 		params.put("fave", "0");
 		params.put("mock", "0");
@@ -132,14 +129,14 @@ public class AboutClasses {
 		return text;
 	}
 	
-	public String saveBook(String id) {
+	public String saveBook(String id, String mid) {
 		String url = "http://www.abc360.com/MemberCenter/BookClass/saveBook";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("request", "");
 		params.put("uf", "1");
 		params.put("id", id);
-		params.put("mid", "5357");
-		params.put("mid", "5357");
+		params.put("mid", mid);
+		params.put("mid", mid);
 		params.put("i2h", "0");
 		params.put("mock", "0");
 		params.put("use_tool", "2");
@@ -166,14 +163,21 @@ public class AboutClasses {
 			dataList2.add("07:20");
 			dataMap.put("1568", dataList);
 			dataMap.put("2139", dataList2);
-			String tids = "1568,2139";
+			
+			List<String> dataList3 = new ArrayList<String>();
+			dataList2.add("07:00");
+			dataList2.add("07:20");
+			dataMap.put("2851", dataList3);
+			
+			String tids = "1568,2139,2851";
+			String mid = "5367";
 			boolean isTure = false;
 			loop:
 			for(String tid : tids.split(",")) {
 				String text = "-1";
 				while("-1".equals(text)) {
 					
-					text = classes.chooseTeacher(tid, dataMap);
+					text = classes.chooseTeacher(tid, dataMap, mid);
 					if("end".equals(text)) {
 						break;
 					}
@@ -181,14 +185,75 @@ public class AboutClasses {
 					if("-1".equals(text)) {
 						System.err.println("课程还未开始");
 						try {
-							Thread.sleep(2000);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						continue;
 					}
-					String jsonData = classes.saveBook(text);
+					String jsonData = classes.saveBook(text, mid);
+					System.out.println(jsonData);
+					isTure = true;
+					break loop;
+				}
+			}
+			
+			if(isTure) {
+				System.out.println("订课成功");
+			} else {
+				System.out.println("您的老师课程都已经被预定");
+			}
+			
+		} else {
+			System.out.println("登录失败");
+		}
+	}
+
+	@Override
+	public void run() {
+		
+		boolean login = login("18301423090", "0553qjj");
+		
+		if(login) {
+			Map<String, List<String>> dataMap = new HashMap<String, List<String>>();
+			List<String> dataList = new ArrayList<String>();
+			dataList.add("07:00");
+			dataList.add("07:20");
+			
+			List<String> dataList2 = new ArrayList<String>();
+			dataList2.add("07:00");
+			dataList2.add("07:20");
+			dataMap.put("1568", dataList);
+			dataMap.put("2139", dataList2);
+			
+			List<String> dataList3 = new ArrayList<String>();
+			dataList2.add("07:00");
+			dataList2.add("07:20");
+			dataMap.put("2851", dataList3);
+			
+			String tids = "2139,2851";
+			String mid = "5367";
+			boolean isTure = false;
+			loop:
+			for(String tid : tids.split(",")) {
+				String text = "-1";
+				while("-1".equals(text)) {
+					
+					text = chooseTeacher(tid, dataMap, mid);
+					if("end".equals(text)) {
+						break;
+					}
+					
+					if("-1".equals(text)) {
+						System.err.println("课程还未开始");
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						continue;
+					}
+					String jsonData = saveBook(text, mid);
 					System.out.println(jsonData);
 					isTure = true;
 					break loop;
