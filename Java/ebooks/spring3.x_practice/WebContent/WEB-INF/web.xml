@@ -11,7 +11,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath*:config/applicationContext_*.xml</param-value>
   </context-param>
   <listener>
     <listener-class>
@@ -28,5 +28,15 @@
   <servlet-mapping>
     <servlet-name>user</servlet-name>
     <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>servletContextResouceTest</servlet-name>
+  	<servlet-class>com.shma.chapter03.resource.ServletContextResouceTest</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>servletContextResouceTest</servlet-name>
+  	<url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>

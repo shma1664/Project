@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shma.chapter02.login.domain.User;
 import com.shma.chapter02.login.service.UserService;
 
-
 @Controller
 public class LoginController {
 

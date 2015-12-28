@@ -1,4 +1,4 @@
-package test.com.shma.service;
+package com.shma.chapter02.test;
 
 import org.junit.Assert;
 import org.junit.Test;

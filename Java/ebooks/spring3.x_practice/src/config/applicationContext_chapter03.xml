@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean id="geli" class="com.shma.chapter03.ioc.LiuDeHua">
+    	<property name="name" value="刘德华"></property>
+    </bean>
+    
+    <bean id="moAttack" class="com.shma.chapter03.ioc.MoAttack">
+    	<constructor-arg>
+    		<ref bean="geli" />
+    	</constructor-arg>
+    </bean>
+    
+    <bean id="moAttack2" class="com.shma.chapter03.ioc.MoAttack">
+    	<property name="geli">
+    		<ref bean="geli"></ref>
+    	</property>
+    </bean>
+    
+</beans>

@@ -1,0 +1,26 @@
+1、IOC：控制反转，通过反射机制实现
+2、注入方法：
+	构造器注入
+	属性注入
+	接口注入
+3、类加载器加载过程：
+	1) 装载：查找和导入java字节码文件
+	2) 链接：执行效验、准备和解析
+		效验：验证class文件的正确性
+		准备：给类的静态变量分配内存空间
+		解析：将符号引用转换为直接引用
+		
+	3) 初始化
+		类的初始化通过ClassLoader类加载器加载，
+		加载器分为根加载器，ExtClassLoader(可扩展加载器)，AppClassLoader(系统类加载器)，
+		根加载器是C++实现，没有父类，负责加载JRE核心类
+		ExtClassLoader负责加载JRE扩展目录ext中的jar包，
+		AppClassLoader负责加载ClassPath下的class文件
+	AppClassLoader --> ExtClassLoader --> 根加载器
+	
+4、资源访问:Resource类
+	1) FileSystemResouce:绝对路径
+	2) ClassPathResource:相对路径
+	3) ServletContextResouce:项目路径
+
+		
