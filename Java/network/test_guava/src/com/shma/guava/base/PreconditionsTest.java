@@ -30,7 +30,7 @@ import com.google.common.base.Preconditions;
 		功能描述：检查[start, end)是一个长度为size的list， string或array合法的范围子集。伴随着错误信息。
 		失败时抛出的异常类型：IndexOutOfBoundsException
  */
-public class TestPreconditions {
+public class PreconditionsTest {
 
 	public void paramCheck(String userName, int age) {
 		try {

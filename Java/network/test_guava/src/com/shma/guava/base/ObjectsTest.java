@@ -10,60 +10,11 @@ import com.google.common.collect.ComparisonChain;
  * @author admin
  *
  */
-public class TestObjects {
+public class ObjectsTest {
 	
-	class Student implements Comparable<Student> {
-		private String name;
-		private int age;
-		private int score;
-		
-		public Student() {
-			super();
-		}
-
-		public Student(String name, int age, int score) {
-			super();
-			this.name = name;
-			this.age = age;
-			this.score = score;
-		}
-
-		@Override
-		public String toString() {
-			return Objects.toStringHelper(this)
-						  .add("name", name)
-						  .add("age", age)
-						  .add("score", score)
-						  .toString();
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hashCode(name, age);
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof Student) {
-	            Student that = (Student) obj;
-	            return Objects.equal(name, that.name)
-	                    && Objects.equal(age, that.age)
-	                    && Objects.equal(score, that.score);
-	        }
-	        return false;
-		}
-
-		@Override
-		public int compareTo(Student student) {
-			return ComparisonChain.start()
-								  .compare(this.name, student.name)
-								  .compare(this.age, student.age)
-								  .compare(this.score, student.score)
-								  .result();
-		}
-
-	}
-	
+	/**
+	 * 比较大小
+	 */
 	@Test
 	public void compareTest() {
 		Person person1 = new Person("jqq", 24);
@@ -77,6 +28,9 @@ public class TestObjects {
 		System.out.println(person5.compareTo(person4));
 	}
 	
+	/**
+	 * 实现toString
+	 */
 	@Test
 	public void toStringTest() {
 		System.out.println(Objects.toStringHelper(this).add("name", "shma").toString());
@@ -91,6 +45,9 @@ public class TestObjects {
 		System.out.println(person1.equals(person2));
 	}
 
+	/**
+	 * 判断equals
+	 */
 	@Test
 	public void equalsTest() {
 		System.out.println(Objects.equal(null, "a")); //false
@@ -105,6 +62,10 @@ public class TestObjects {
 		System.out.println(Objects.equal(person, person)); //true
 	}
 	
+	/**
+	 * 计算hashcode
+	 * 
+	 */
 	@Test
 	public void hashCodeTest() {
 		System.out.println(Objects.hashCode("a")); //128
@@ -166,6 +127,58 @@ public class TestObjects {
 			return ComparisonChain.start()
 								  .compare(this.name, perosn.name)
 								  .compare(this.age, perosn.age)
+								  .result();
+		}
+
+	}
+	
+	class Student implements Comparable<Student> {
+		private String name;
+		private int age;
+		private int score;
+		
+		public Student() {
+			super();
+		}
+
+		public Student(String name, int age, int score) {
+			super();
+			this.name = name;
+			this.age = age;
+			this.score = score;
+		}
+
+		@Override
+		public String toString() {
+			return Objects.toStringHelper(this)
+						  .add("name", name)
+						  .add("age", age)
+						  .add("score", score)
+						  .toString();
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(name, age);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof Student) {
+	            Student that = (Student) obj;
+	            return Objects.equal(name, that.name)
+	                    && Objects.equal(age, that.age)
+	                    && Objects.equal(score, that.score);
+	        }
+	        return false;
+		}
+
+		@Override
+		public int compareTo(Student student) {
+			return ComparisonChain.start()
+								  .compare(this.name, student.name)
+								  .compare(this.age, student.age)
+								  .compare(this.score, student.score)
 								  .result();
 		}
 

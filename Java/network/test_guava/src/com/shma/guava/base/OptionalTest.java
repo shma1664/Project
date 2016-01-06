@@ -21,7 +21,7 @@ T orNull()	当Optional的值为null时，则返回Null。否则返回Optional的
 Set<T> asSet()	将Optional中的值转为一个Set返回，当然只有一个值啦，或者为空，当值为null时。
  *
  */
-public class TestOptional {
+public class OptionalTest {
 
 	public void sayHello(String userName) {
 		userName = Optional.fromNullable(userName).or("游客");

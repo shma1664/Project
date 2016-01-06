@@ -66,6 +66,7 @@ public class ImmutableCollectionTest {
 															.add("blue")
 															.add("purple")
 															.build();
+		System.out.println(colorImmutableSet);
 		dataList.add("wangwu");
 		
 		System.out.println("list:" + dataList);
@@ -85,8 +86,8 @@ public class ImmutableCollectionTest {
 		
 		ImmutableSet<Integer> limitIntSet = ImmutableSet.copyOf(intList.subList(0, 10));
 		System.out.println(limitIntSet);
+		System.out.println(intList);
 		
-	}														
+	}
 	
-
 }
