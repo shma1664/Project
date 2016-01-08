@@ -1,4 +1,4 @@
-package com.shma.bigtalk.simplefactory.calculator;
+package com.shma.bigtalk.simplefactory;
 
 public class MultOpterImpl implements IOperation<Double> {
 
