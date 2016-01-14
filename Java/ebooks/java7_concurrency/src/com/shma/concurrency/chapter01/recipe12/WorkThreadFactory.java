@@ -7,9 +7,6 @@ public class WorkThreadFactory implements ThreadFactory {
 
 	private final AtomicInteger counter = new AtomicInteger();
 	
-	private String name;
-	
-	
 	@Override
 	public Thread newThread(Runnable r) {
 		int c = counter.incrementAndGet();
